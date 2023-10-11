@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.26)
+
+PROJECT(2_3_trees_and_segs)
+
+add_executable(test spi.c  spi_test.c)
+add_executable(intersect_eff spi.c effective.c)
+# add_executable(intersect_naive naive.c)
+add_executable(gen_segs gen_segs.c)

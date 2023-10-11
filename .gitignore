@@ -1,0 +1,6 @@
+.vscode/
+build/
+parser-*/*
+!parser-*/*User*
+!parser-*/calc.[hcpp]
+!parser-*/gram.[hcpp]
