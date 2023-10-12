@@ -1,8 +1,13 @@
 cmake_minimum_required(VERSION 3.26)
 
 PROJECT(2_3_trees_and_segs)
+set(LAB_TESTS ON CACHE BOOL "Enable tests")
 
 add_executable(test spi.c  spi_test.c)
+
 add_executable(intersect_eff spi.c effective.c)
-# add_executable(intersect_naive naive.c)
+if(LAB_TESTS)
+    target_compile_definitions(intersect_eff PRIVATE -DTESTS)
+endif()
+
 add_executable(gen_segs gen_segs.c)
