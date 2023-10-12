@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "seg_t.h"
 #include "io_segs.h"
 
 

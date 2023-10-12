@@ -5,9 +5,9 @@ set(LAB_TESTS ON CACHE BOOL "Enable tests")
 
 add_executable(test spi.c  spi_test.c)
 
-add_executable(intersect_eff spi.c effective.c)
+add_executable(main spi.c main.c)
 if(LAB_TESTS)
-    target_compile_definitions(intersect_eff PRIVATE -DTESTS)
+    target_compile_definitions(main PRIVATE -DTESTS)
 endif()
 
 add_executable(gen_segs gen_segs.c)
