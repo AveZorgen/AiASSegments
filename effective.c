@@ -13,6 +13,11 @@
 #define DEBUG
 #endif
 
+#ifdef GOOD_AT_K_NAIVE
+#define FILE_EXT "_good_k.txt"
+#else
+#define FILE_EXT ".txt"
+#endif
 
 // sort methods
 void pnt_swap(pPoint a, pPoint b) {
@@ -65,7 +70,7 @@ void launch_naive(pSeg segs, int n, FILE *const _Stream);
 // tests
 // n t1 t2 t3
 void test1() {
-    FILE *f = fopen("test1_mcs_good_k.txt", "w");
+    FILE *f = fopen("test1_mcs"FILE_EXT, "w");
     pSeg segs;
     segs = malloc(10001 * sizeof(Seg)); // empty segs
     for (int n = 1; n < 10001 + 1; n += 100) {
@@ -75,7 +80,7 @@ void test1() {
 
         fprintf(f, "%i ", n);
         launch_naive(segs, n, f); // segs does not changed
-        // launch_effective(segs, n, f);
+        launch_effective(segs, n, f);
         fprintf(f, "\n");
     }
     free(segs);
@@ -84,7 +89,7 @@ void test1() {
 
 // k t1 t2 t3
 void test2() {
-    FILE *f = fopen("test2_mcs_good_k.txt", "w");
+    FILE *f = fopen("test2_mcs"FILE_EXT, "w");
     int n = 10003;
     pSeg segs = malloc(n * sizeof(Seg));
     for (int k = 1; k < 10001 + 1; k += 100) {
@@ -94,7 +99,7 @@ void test2() {
 
         fprintf(f, "%i ", k);
         launch_naive(segs, n, f);
-        // launch_effective(segs, n, f);
+        launch_effective(segs, n, f);
         fprintf(f, "\n");
     }
     free(segs);
@@ -103,7 +108,7 @@ void test2() {
 
 // n t1 t2 t3
 void test3() {
-    FILE *f = fopen("test3_mcs_good_k.txt", "w");
+    FILE *f = fopen("test3_mcs"FILE_EXT, "w");
     double r = 0.001;
     pSeg segs;
     segs = malloc(10001 * sizeof(Seg));
@@ -114,7 +119,7 @@ void test3() {
 
         fprintf(f, "%i ", n);
         launch_naive(segs, n, f);
-        // launch_effective(segs, n, f);
+        launch_effective(segs, n, f);
         fprintf(f, "\n");
     }
     free(segs);
@@ -123,7 +128,7 @@ void test3() {
 
 // r t1 t2 t3
 void test4() {
-    FILE *f = fopen("test4_mcs_good_k.txt", "w");
+    FILE *f = fopen("test4_mcs"FILE_EXT, "w");
     int n = 10000;
     pSeg segs = malloc(n * sizeof(Seg));
     for (double r = 0.0001; r < 0.01; r += 0.0001) {
@@ -132,7 +137,7 @@ void test4() {
 
         fprintf(f, "%lf ", r);
         launch_naive(segs, n, f);
-        // launch_effective(segs, n, f);
+        launch_effective(segs, n, f);
         fprintf(f, "\n");
     }
     free(segs);
@@ -141,7 +146,7 @@ void test4() {
 
 // n t1 t2 t3
 void test5() {
-    FILE *f = fopen("test5_mcs_good_k.txt", "w");
+    FILE *f = fopen("test5_mcs"FILE_EXT, "w");
     pSeg segs;
     segs = malloc(15001 * sizeof(Seg));
     for (int n = 1; n < 15001 + 1; n += 100) {
@@ -150,7 +155,7 @@ void test5() {
         //     o_txt_dump(segs, n);
         fprintf(f, "%i ", n);
         launch_naive(segs, n, f);
-        // launch_effective(segs, n, f);
+        launch_effective(segs, n, f);
         fprintf(f, "\n");
 
 #ifdef DEBUG
@@ -215,7 +220,7 @@ int main(int argc, char **argv) {
 
     bool try_intersect = intersection_naive(segs, n, &seg1, &seg2, &time1);
     if (try_intersect) {
-        printf("between [(%lf %lf) (%lf %lf)], [(%lf %lf) (%lf %lf)]\n", seg1.u.x, seg1.u.y, seg1.v.x, seg1.v.y,
+        printf("[(%lf %lf) (%lf %lf)], [(%lf %lf) (%lf %lf)]\n", seg1.u.x, seg1.u.y, seg1.v.x, seg1.v.y,
                seg2.u.x, seg2.u.y, seg2.v.x, seg2.v.y);
     }
 
@@ -223,7 +228,7 @@ int main(int argc, char **argv) {
     fill_points(points, segs, n);
     try_intersect = intersection_effective(segs, n, points, &seg1, &seg2, &time2, &time3);
     if (try_intersect) {
-        printf("between [(%lf %lf) (%lf %lf)], [(%lf %lf) (%lf %lf)]\n", seg1.u.x, seg1.u.y, seg1.v.x, seg1.v.y,
+        printf("[(%lf %lf) (%lf %lf)], [(%lf %lf) (%lf %lf)]\n", seg1.u.x, seg1.u.y, seg1.v.x, seg1.v.y,
                seg2.u.x, seg2.u.y, seg2.v.x, seg2.v.y);
     }
     free(points);
