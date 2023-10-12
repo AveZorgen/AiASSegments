@@ -158,7 +158,7 @@ void test5() {
 #endif // DEBUG
     }
     // int n = 9501;
-    // i_txt_dump(segs, &n);
+    // i_txt_dump(&segs, &n);
     // launch_effective(segs, n, f);
     free(segs);
     fclose(f);
@@ -204,7 +204,7 @@ int main(int argc, char **argv) {
 #else
     int n;
     pSeg segs;
-    i_kb_dump(segs, &n);
+    i_kb_dump(&segs, &n);
     // generate_random_segs(segs, n);
     // generate_random_segs_with_k(segs, n, n - 2, 10.0);
     // generate_random_segs_in_square(segs, n, 0.05);

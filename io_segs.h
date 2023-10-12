@@ -110,11 +110,11 @@ void o_bin_dump(pSeg segs, int n) {
     fclose(f);
 }
 
-void i_bin_dump(pSeg segs, int* n) {
+void i_bin_dump(ppSeg segs, int* n) {
     FILE *f = fopen("segments.bin", "rb");
     fread(n, sizeof(*n), 1, f);
-    segs = malloc(*n * sizeof(Seg));
-    fread(segs, sizeof(*segs), *n, f);
+    *segs = malloc(*n * sizeof(Seg));
+    fread(*segs, sizeof(Seg), *n, f);
     fclose(f);
 }
 
@@ -125,14 +125,14 @@ void __o_stream_dump(pSeg segs, int n, FILE* stream) {
     }
 }
 
-void __i_stream_dump(pSeg segs, int* n, FILE* stream) {
+void __i_stream_dump(ppSeg segs, int* n, FILE* stream) {
     fscanf(stream, "%d", n);
-    segs = malloc(*n * sizeof(Seg));
+    *segs = malloc(*n * sizeof(Seg));
     for (int i = 0; i < *n; i++) {
-        fscanf(stream, "%lf %lf %lf %lf", &segs[i].u.x, &segs[i].u.y, &segs[i].v.x, &segs[i].v.y);
-        segs[i].u.seg_idx = segs[i].v.seg_idx = i;
-        segs[i].u.is_left = true;
-        segs[i].v.is_left = false;
+        fscanf(stream, "%lf %lf %lf %lf", &(*segs)[i].u.x, &(*segs)[i].u.y, &(*segs)[i].v.x, &(*segs)[i].v.y);
+        (*segs)[i].u.seg_idx = (*segs)[i].v.seg_idx = i;
+        (*segs)[i].u.is_left = true;
+        (*segs)[i].v.is_left = false;
     } 
 }
 
@@ -142,7 +142,7 @@ void o_txt_dump(pSeg segs, int n) {
     fclose(f);
 }
 
-void i_txt_dump(pSeg segs, int* n) {
+void i_txt_dump(ppSeg segs, int* n) {
     FILE *f = fopen("segments.txt", "r");
     __i_stream_dump(segs, n, f);
     fclose(f);
@@ -152,7 +152,7 @@ void o_kb_dump(pSeg segs, int n) {
     __o_stream_dump(segs, n, stdout);
 }
 
-void i_kb_dump(pSeg segs, int* n) {
+void i_kb_dump(ppSeg segs, int* n) {
     __i_stream_dump(segs, n, stdin);
 }
 

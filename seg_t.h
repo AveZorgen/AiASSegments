@@ -12,7 +12,7 @@
 typedef struct { double x; double y; PNT_INFO } Point, *pPoint;
 
 #define SEG_INFO double k; double t_as_param;
-typedef struct { Point u; Point v; SEG_INFO } Seg, *pSeg; 
+typedef struct { Point u; Point v; SEG_INFO } Seg, *pSeg, **ppSeg; 
 
 
 inline bool double_intersect1d(double l1, double r1, double l2, double r2) {

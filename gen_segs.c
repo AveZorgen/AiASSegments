@@ -65,7 +65,7 @@ int main(int argc, char **argv) {
     memset(segs, 0, n * sizeof(*segs));
 
     free(segs);
-    i_bin_dump(segs, &n);
+    i_bin_dump(&segs, &n);
 
     o_kb_dump(segs, n);
     printf("\n");
